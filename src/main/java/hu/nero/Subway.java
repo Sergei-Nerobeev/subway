@@ -9,30 +9,32 @@ import java.util.Set;
 public class Subway {
 
     private static final Logger log = LogManager.getLogger(Subway.class);
-    private String name;
+    private String cityName;
     private Set<Line> lines;
     private Subway subway;
 
-    public Subway(String name) {
-        this.name = name;
+    public Subway(String cityName) {
+        this.cityName = cityName;
         this.lines = new HashSet<>();
+
 
     }
 
     public void createNewLine(String color) {
 
-        if (lines.stream().anyMatch(line -> !Boolean.parseBoolean(color))) {
-            lines.add(new Line(color, getSubway()));
-            log.debug("OK");
+        if (lines.stream().anyMatch(line -> line.getColor().equals(color))){
+            throw new ColorLineException(color + " is already in");
         }
+        lines.add(new Line(color, getSubway()));
     }
 
-    public String getName() {
-        return name;
+
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public Set<Line> getLines() {
@@ -50,4 +52,5 @@ public class Subway {
     public void setSubway(Subway subway) {
         this.subway = subway;
     }
+
 }
