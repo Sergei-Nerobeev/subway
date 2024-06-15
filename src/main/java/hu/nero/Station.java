@@ -7,7 +7,7 @@ import java.time.Duration;
 
 public class Station {
     private static final Logger log = LogManager.getLogger(Station.class);
-    private String station;
+    private String nameStation;
     private String previousStation;
     private String nextStation;
     private Duration transitTime;
@@ -15,9 +15,9 @@ public class Station {
     private String transferStation;
     private Subway subway;
 
-    public Station(String station, String previousStation, String nextStation, Duration transitTime,
+    public Station(String nameStation, String previousStation, String nextStation, Duration transitTime,
                    Line line, String transferStation, Subway subway) {
-        this.station = station;
+        this.nameStation = nameStation;
         this.previousStation = previousStation;
         this.nextStation = nextStation;
         this.transitTime = transitTime;
@@ -26,12 +26,12 @@ public class Station {
         this.subway = subway;
     }
 
-    public String getStation() {
-        return station;
+    public String getNameStation() {
+        return nameStation;
     }
 
-    public void setStation(String station) {
-        this.station = station;
+    public void setNameStation(String nameStation) {
+        this.nameStation = nameStation;
     }
 
     public String getPreviousStation() {

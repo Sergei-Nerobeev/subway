@@ -46,3 +46,5 @@ G.idea/sonarlint/issuestore/2/c/2cabb939da04d3de3a200bf2b575690e1a16316d,1/0/10
 ,src/main/java/hu/nero/ColorLineExeption.java,2\6\26e00081dc71508d24e15b2d6fa9d523a5dc5d28
 ]
 -src/main/java/hu/nero/ColorLineException.java,6\e\6e6140e001ac43bfb29d494bee457ea378b655c7
+]
+-src/main/java/hu/nero/StationInException.java,9\7\977985e6b5603b0203404432c8537bd62fce9a0b
