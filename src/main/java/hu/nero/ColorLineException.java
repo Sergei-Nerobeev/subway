@@ -2,6 +2,7 @@ package hu.nero;
 
 public class ColorLineException extends RuntimeException {
 
-    public ColorLineException(String s) {
+    public ColorLineException(String message) {
+        super(message);
     }
 }

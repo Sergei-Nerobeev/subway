@@ -3,6 +3,7 @@ package hu.nero;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.Duration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,25 +21,30 @@ public class Subway {
 
     }
 
-    public void createNewLine(String color) {
+    public void createNewLine(String lineColor) {
 
-        if (lines.stream().anyMatch(line -> line.getColor().equals(color))) {
-            throw new ColorLineException(color + " is already in");
+        if (lines.stream().anyMatch(line -> line.getColor().equals(lineColor))) {
+            throw new ColorLineException(lineColor + " is already in");
         }
-        lines.add(new Line(color, getSubway()));
+        lines.add(new Line(lineColor, getSubway()));
     }
 
-    public void createFirstStationLine(String color, String station, List<Station> transitStations, List<Station> transferStations) {
-        if (lines.stream().anyMatch(line -> line.getColor().equals(color))) {
-            throw new ColorLineException(color + " is already in");
+    public void createFirstStationLine(String lineColor, String nameStation, List<Station> transitStations,
+                                       List<Station> transferStations) {
+        if (lines.stream().anyMatch(line -> line.getColor().equals(lineColor))) {
+            throw new ColorLineException(lineColor + " is already in Line color");
         }
-        if (lines.stream().anyMatch(line -> line.getStations().equals(station))) {
-            throw new StationInException();
+        if (lines.stream().anyMatch(line -> line.getStations().equals(nameStation))) { //спросить
+            throw new StationInException(nameStation + " is already in naming stations");
         }
         if (lines.stream().anyMatch(line -> line.getStations().isEmpty())) {
             throw new RuntimeException("Line is empty");
         }
+    }
 
+    public void createLastStation(String lineColor, String newNameStation, Duration durationFromPrevStation,
+                                  List<Station> transferStations) {
+    //TODO спросить
     }
 
     public String getCityName() {

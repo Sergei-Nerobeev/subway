@@ -42,8 +42,6 @@ w
 G.idea/sonarlint/issuestore/a/5/a5cc2925ca8258af241be7e5b0381edf30266302,e/d/ed67eb178d523a4b3f117dcbe0eda5196367ceec
 w
 G.idea/sonarlint/issuestore/2/c/2cabb939da04d3de3a200bf2b575690e1a16316d,1/0/10f2119b18de4c2d93011c2acd27301df22c2983
-\
-,src/main/java/hu/nero/ColorLineExeption.java,2\6\26e00081dc71508d24e15b2d6fa9d523a5dc5d28
 ]
 -src/main/java/hu/nero/ColorLineException.java,6\e\6e6140e001ac43bfb29d494bee457ea378b655c7
 ]
