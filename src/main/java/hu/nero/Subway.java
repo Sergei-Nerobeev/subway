@@ -28,12 +28,12 @@ public class Subway {
             throw new ColorLineException(lineColor + " is already in");
         }
         lines.add(new Line(lineColor, getSubway()));
-        return lines;
+        return lines; // ???
     }
 
     public Station createFirstStationLine(String lineColor, String nameStation, List<Station> transitStations) {
 
-        subway.createNewLine();
+        subway.createNewLine(); // ??
 
         if (lines.stream().anyMatch(line -> line.getColor().equals(lineColor))) {
             throw new ColorLineException(lineColor + " is already in Line color");
@@ -44,7 +44,7 @@ public class Subway {
         if (lines.stream().anyMatch(line -> line.getStations().isEmpty())) {
             throw new RuntimeException("Line is empty");
         }
-        return lines.add()
+        return lines.add(); //??
     }
 
     public void createLastStation(String lineColor, String newNameStation, Duration durationFromPrevStation,
