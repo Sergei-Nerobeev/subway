@@ -11,7 +11,7 @@ Q.idea/sonarlint/securityhotspotstore/4/4/442292b8a7efeabbe4cc176709b833b1792140
 Q.idea/sonarlint/securityhotspotstore/f/4/f477a3c288d8324f9574454bb9c09cd41b7b96a6,b/6/b6a05ded736153e050d4d00a704a79bcd7ddda66
 :
 
-.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 O
@@ -42,7 +42,7 @@ w
 G.idea/sonarlint/issuestore/a/5/a5cc2925ca8258af241be7e5b0381edf30266302,e/d/ed67eb178d523a4b3f117dcbe0eda5196367ceec
 w
 G.idea/sonarlint/issuestore/2/c/2cabb939da04d3de3a200bf2b575690e1a16316d,1/0/10f2119b18de4c2d93011c2acd27301df22c2983
-]
--src/main/java/hu/nero/ColorLineException.java,6\e\6e6140e001ac43bfb29d494bee457ea378b655c7
-]
--src/main/java/hu/nero/StationInException.java,9\7\977985e6b5603b0203404432c8537bd62fce9a0b
+g
+7src/main/java/hu/nero/exception/StationInException.java,5\0\50c291425ee37016df58d6eec9ea59b55d20ec88
+g
+7src/main/java/hu/nero/exception/ColorLineException.java,a\3\a39780c8f292099e73187da83fa83351092cba2c

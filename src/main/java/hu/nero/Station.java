@@ -4,81 +4,84 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Station {
     private static final Logger log = LogManager.getLogger(Station.class);
-    private String nameStation;
-    private String previousStation;
-    private String nextStation;
-    private Duration transitTime;
-    private Line line;
-    private String transferStation;
-    private Subway subway;
+    private final String name;
+    private Station previous;
+    private Station next;
+    private Duration transitTimeInMinutesAndSeconds;
+    private final Line line;
+    private final List<Station> transferStations;
+    private final Subway subway;
 
-    public Station(String nameStation, String previousStation, String nextStation, Duration transitTime,
-                   Line line, String transferStation, Subway subway) {
-        this.nameStation = nameStation;
-        this.previousStation = previousStation;
-        this.nextStation = nextStation;
-        this.transitTime = transitTime;
+    public Station(String name,
+                   Station previous,
+                   Station next,
+                   Duration transitTimeInMinutesAndSeconds,
+                   Line line,
+                   Subway subway) {
+        this.name = name;
+        this.previous = previous;
+        this.next = next;
+        this.transitTimeInMinutesAndSeconds = transitTimeInMinutesAndSeconds;
         this.line = line;
-        this.transferStation = transferStation;
+        this.transferStations = new ArrayList<>();
         this.subway = subway;
     }
 
-    public String getNameStation() {
-        return nameStation;
+    public Station(String name,
+                   Line line,
+                   List<Station> transferStations,
+                   Subway subway) {
+            this(name,
+                null,
+                null,
+                null,
+                line,
+                subway);
     }
 
-    public void setNameStation(String nameStation) {
-        this.nameStation = nameStation;
+    public String getName() {
+        return name;
     }
 
-    public String getPreviousStation() {
-        return previousStation;
+    public Station getPrevious() {
+        return previous;
     }
 
-    public void setPreviousStation(String previousStation) {
-        this.previousStation = previousStation;
+    public void setPrevious(Station previous) {
+        this.previous = previous;
     }
 
-    public String getNextStation() {
-        return nextStation;
+    public Station getNext() {
+        return next;
     }
 
-    public void setNextStation(String nextStation) {
-        this.nextStation = nextStation;
+    public void setNext(Station next) {
+        this.next = next;
     }
 
-    public Duration getTransitTime() {
-        return transitTime;
+    public Duration getTransitTimeInMinutesAndSeconds() {
+        return transitTimeInMinutesAndSeconds;
     }
 
-    public void setTransitTime(Duration transitTime) {
-        this.transitTime = transitTime;
+    public void setTransitTimeInMinutesAndSeconds(Duration transitTimeInMinutesAndSeconds) {
+        this.transitTimeInMinutesAndSeconds = transitTimeInMinutesAndSeconds;
+    }
+
+    public List<Station> getTransferStations() {
+        return transferStations;
     }
 
     public Line getLine() {
         return line;
     }
 
-    public void setLine(Line line) {
-        this.line = line;
-    }
-
-    public String getTransferStation() {
-        return transferStation;
-    }
-
-    public void setTransferStation(String transferStation) {
-        this.transferStation = transferStation;
-    }
-
     public Subway getSubway() {
         return subway;
     }
 
-    public void setSubway(Subway subway) {
-        this.subway = subway;
-    }
 }

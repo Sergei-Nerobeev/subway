@@ -1,44 +1,39 @@
 package hu.nero;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import hu.nero.exception.ColorLineException;
+import hu.nero.exception.StationInException;
 
-import java.time.Duration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Subway {
-
     private String cityName;
     private Set<Line> lines;
-    private Subway subway;
-
 
     public Subway(String cityName) {
         this.cityName = cityName;
         this.lines = new HashSet<>();
-
-
     }
 
-    public Set<Line> createNewLine(String lineColor) { //????
+    public boolean isLineWithThisColorExists(String newLineColor) {
+        return lines.stream().anyMatch(line -> line.getColor().equals(newLineColor));
+    }
 
-        if (lines.stream().anyMatch(line -> line.getColor().equals(lineColor))) {
-            throw new ColorLineException(lineColor + " is already in");
+    public Line createNewLine(String lineColor) {
+        if (isLineWithThisColorExists(lineColor)) {
+            throw new ColorLineException(lineColor + " is already in color Lines!");
         }
-        lines.add(new Line(lineColor, getSubway()));
-        return lines; // ???
+        Line line = new Line(lineColor, this);
+        lines.add(line);
+        return line;
     }
 
     public Station createFirstStationLine(String lineColor, String nameStation, List<Station> transitStations) {
-
-        subway.createNewLine(); // ??
-
-        if (lines.stream().anyMatch(line -> line.getColor().equals(lineColor))) {
+        if (isLineWithThisColorExists(lineColor)) {
             throw new ColorLineException(lineColor + " is already in Line color");
         }
-        if (lines.stream().anyMatch(line -> line.getStations().equals(nameStation))) { //спросить
+        if (lines.stream().flatMap(line -> line.getColor()) { //todo
             throw new StationInException(nameStation + " is already in naming stations");
         }
         if (lines.stream().anyMatch(line -> line.getStations().isEmpty())) {
@@ -47,10 +42,6 @@ public class Subway {
         return lines.add(); //??
     }
 
-    public void createLastStation(String lineColor, String newNameStation, Duration durationFromPrevStation,
-                                  List<Station> transferStations) {
-        //TODO спросить
-    }
 
     public String getCityName() {
         return cityName;

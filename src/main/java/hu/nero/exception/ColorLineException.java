@@ -1,4 +1,4 @@
-package hu.nero;
+package hu.nero.exception;
 
 public class ColorLineException extends RuntimeException {
 

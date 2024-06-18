@@ -16,10 +16,10 @@ class SubwayTest {
     private Station station;
     private Line line;
 
-    String nameStation = "Медведковская";
+    String name = "Медведковская";
     String expectedNameStation = "Медведковская";
-    String previousStation = "Спортивная";
-    String nextStation = "Молодежная";
+    Station previous;
+    Station next;
     String transferStation1 = "Пермь-1";
     String transferStation2 = "Тяжмаш";
     String colorActual = "Red";
@@ -32,17 +32,12 @@ class SubwayTest {
 
     @BeforeEach
     void setup() {
-
         Subway subway = new Subway("Budapest");
         Line line = new Line(colorExpected, subway);
-        Station station = new Station(nameStation, previousStation, nextStation,
-                Duration.ofMinutes(2), line, transferStation1, subway);
-
     }
 
     @Test
     void isNewLineCreated() {
-
         subway.createNewLine(colorActual);
         subway.createNewLine("White");
         Assertions.assertEquals(colorActual, colorExpected);
@@ -55,9 +50,9 @@ class SubwayTest {
         stations.add(station);
         exceptedStations.add(station);
         exceptedTransferStations.add(station);
-        subway.createFirstStationLine(colorActual, nameStation, stations, transferStations);
+//        subway.createFirstStationLine(colorActual, name, stations, transferStations);
         Assertions.assertEquals(colorActual, colorExpected);
-        Assertions.assertEquals(nameStation, expectedNameStation);
+        Assertions.assertEquals(name, expectedNameStation);
         Assertions.assertEquals(stations, exceptedStations);
         Assertions.assertEquals(transferStations, exceptedStations);
     }
