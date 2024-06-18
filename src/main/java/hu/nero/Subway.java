@@ -52,10 +52,10 @@ public class Subway {
             throw new StationNameException(nameStation + " already exists!");
         }
         Line line = new Line(lineColor, this);
-        if (!line.getColor().equals(lineColor)) {
-            throw new LineNotEmptyException("Line is not empty!");
+        if (!line.getStations().contains(null)) {
+            return new Station(nameStation, line, transitStations, this);
         }
-        return new Station(nameStation, line, transitStations, this);
+        throw new LineNotEmptyException("Line is empty!");
     }
 
     public String getCityName() {
