@@ -28,12 +28,12 @@ class SubwayTest {
     Station station2 = new Station(name, line, null,subway);
 
 
-//    @Test
-//    void isNewLineCreated() {
-//        subway.createNewLine(colorActual);
-//        subway.createNewLine("White");
-//        Assertions.assertEquals(colorActual, colorExpected);
-//    }
+    @Test
+    void isNewLineCreated() {
+        subway.createNewLine(colorActual);
+        subway.createNewLine("White");
+        Assertions.assertEquals(colorActual, colorExpected);
+    }
 
     @Test
     void createFirstStationLineTest() {
