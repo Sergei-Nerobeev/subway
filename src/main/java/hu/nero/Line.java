@@ -22,21 +22,16 @@ public class Line {
         this.color = color;
     }
 
-    public Subway getMetro() {
+    public Subway getSubway() {
         return subway;
     }
 
-    public void setMetro(Subway subway) {
+    public void setSubway(Subway subway) {
         this.subway = subway;
     }
 
     public List<Station> getStations() {
         return stations;
     }
-
-    public void setStations(List<Station> stations) {
-        this.stations = stations;
-    }
-
 
 }

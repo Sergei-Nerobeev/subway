@@ -1,20 +1,14 @@
 import hu.nero.Line;
 import hu.nero.Station;
 import hu.nero.Subway;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 class SubwayTest {
-
-    private Subway subway;
-    private Station station;
-    private Line line;
 
     String name = "Медведковская";
     String expectedNameStation = "Медведковская";
@@ -24,17 +18,15 @@ class SubwayTest {
     String transferStation2 = "Тяжмаш";
     String colorActual = "Red";
     String colorExpected = "Red";
-
+    Subway subway = new Subway("Budapest");
+    Line line = new Line(colorExpected, subway);
     List<Station> stations = new ArrayList<>(); //спросить
     List<Station> exceptedStations = new ArrayList<>();
     List<Station> transferStations = new ArrayList<>();
     List<Station> exceptedTransferStations = new ArrayList<>();
+    Station station1 = new Station(transferStation1,line,transferStations,subway);
+    Station station2 = new Station(name, line, null,subway);
 
-    @BeforeEach
-    void setup() {
-        Subway subway = new Subway("Budapest");
-        Line line = new Line(colorExpected, subway);
-    }
 
     @Test
     void isNewLineCreated() {
@@ -45,16 +37,12 @@ class SubwayTest {
 
     @Test
     void createFirstStationLineTest() {
-
-        transferStations.add(station);
-        stations.add(station);
-        exceptedStations.add(station);
-        exceptedTransferStations.add(station);
-//        subway.createFirstStationLine(colorActual, name, stations, transferStations);
+        transferStations.add(station1);
+        exceptedTransferStations.add(station1);
+        subway.createFirstStationInLine(colorActual, name, transferStations);
         Assertions.assertEquals(colorActual, colorExpected);
         Assertions.assertEquals(name, expectedNameStation);
-        Assertions.assertEquals(stations, exceptedStations);
-        Assertions.assertEquals(transferStations, exceptedStations);
+        Assertions.assertEquals(transferStations, exceptedTransferStations);
     }
 
 

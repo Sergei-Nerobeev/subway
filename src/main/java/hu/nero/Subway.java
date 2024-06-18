@@ -1,7 +1,8 @@
 package hu.nero;
 
 import hu.nero.exception.ColorLineException;
-import hu.nero.exception.StationInException;
+import hu.nero.exception.LineNotEmptyException;
+import hu.nero.exception.StationNameException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -16,32 +17,45 @@ public class Subway {
         this.lines = new HashSet<>();
     }
 
-    public boolean isLineWithThisColorExists(String newLineColor) {
-        return lines.stream().anyMatch(line -> line.getColor().equals(newLineColor));
-    }
-
     public Line createNewLine(String lineColor) {
         if (isLineWithThisColorExists(lineColor)) {
-            throw new ColorLineException(lineColor + " is already in color Lines!");
+            throw new ColorLineException(lineColor + " already exists!");
         }
         Line line = new Line(lineColor, this);
         lines.add(line);
         return line;
     }
 
-    public Station createFirstStationLine(String lineColor, String nameStation, List<Station> transitStations) {
-        if (isLineWithThisColorExists(lineColor)) {
-            throw new ColorLineException(lineColor + " is already in Line color");
-        }
-        if (lines.stream().flatMap(line -> line.getColor()) { //todo
-            throw new StationInException(nameStation + " is already in naming stations");
-        }
-        if (lines.stream().anyMatch(line -> line.getStations().isEmpty())) {
-            throw new RuntimeException("Line is empty");
-        }
-        return lines.add(); //??
+    private boolean isLineWithThisColorExists(String newLineColor) {
+        return lines.stream().anyMatch(line -> line.getColor().equals(newLineColor));
     }
 
+    private boolean isStationNameExistsAnyLine(String nameStation) {
+        for (Line line : lines) {
+            for (Station station : line.getStations()) {
+                if (station.getName().equals(nameStation)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public Station createFirstStationInLine(String lineColor,
+                                            String nameStation,
+                                            List<Station> transitStations) {
+        if (isLineWithThisColorExists(lineColor)) {
+            throw new ColorLineException(lineColor + " already exists!");
+        }
+        if (isStationNameExistsAnyLine(nameStation)) {
+            throw new StationNameException(nameStation + " already exists!");
+        }
+        Line line = new Line(lineColor, this);
+        if (line.getColor().equals(lineColor)) {
+        }
+        return new Station(nameStation, line, transitStations, this);
+    }
 
     public String getCityName() {
         return cityName;
@@ -53,18 +67,6 @@ public class Subway {
 
     public Set<Line> getLines() {
         return lines;
-    }
-
-    public void setLines(Set<Line> lines) {
-        this.lines = lines;
-    }
-
-    public Subway getSubway() {
-        return subway;
-    }
-
-    public void setSubway(Subway subway) {
-        this.subway = subway;
     }
 
 }
