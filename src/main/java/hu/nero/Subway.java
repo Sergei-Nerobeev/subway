@@ -1,7 +1,6 @@
 package hu.nero;
 
 import hu.nero.exception.ColorLineException;
-import hu.nero.exception.LineNotEmptyException;
 import hu.nero.exception.StationNameException;
 
 import java.util.HashSet;
