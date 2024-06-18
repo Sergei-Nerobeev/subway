@@ -1,6 +1,7 @@
 package hu.nero;
 
 import hu.nero.exception.ColorLineException;
+import hu.nero.exception.LineNotEmptyException;
 import hu.nero.exception.StationNameException;
 
 import java.util.HashSet;
@@ -51,7 +52,8 @@ public class Subway {
             throw new StationNameException(nameStation + " already exists!");
         }
         Line line = new Line(lineColor, this);
-        if (line.getColor().equals(lineColor)) {
+        if (!line.getColor().equals(lineColor)) {
+            throw new LineNotEmptyException("Line is not empty!");
         }
         return new Station(nameStation, line, transitStations, this);
     }
