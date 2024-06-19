@@ -2,7 +2,6 @@ import hu.nero.Line;
 import hu.nero.Station;
 import hu.nero.Subway;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ class SubwayTest {
     String colorActual = "Red";
     String colorExpected = "Red";
     Subway subway = new Subway("Budapest");
-    Line line = new Line(colorExpected, subway);
+    Line line = new Line(colorActual, subway);
     List<Station> stations = new ArrayList<>(); //спросить
     List<Station> exceptedStations = new ArrayList<>();
     List<Station> transferStations = new ArrayList<>();

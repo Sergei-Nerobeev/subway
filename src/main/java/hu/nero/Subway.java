@@ -30,7 +30,7 @@ public class Subway {
         return lines.stream().anyMatch(line -> line.getColor().equals(newLineColor));
     }
 
-    private boolean isStationNameExistsAnyLine(String nameStation) {
+    private boolean isStationNameExistsInAnyLine(String nameStation) {
         for (Line line : lines) {
             for (Station station : line.getStations()) {
                 if (station.getName().equals(nameStation)) {
@@ -41,21 +41,20 @@ public class Subway {
         return false;
     }
 
-
     public Station createFirstStationInLine(String lineColor,
                                             String nameStation,
                                             List<Station> transitStations) {
-        if (isLineWithThisColorExists(lineColor)) {
-            throw new ColorLineException(lineColor + " already exists!");
+        if (!isLineWithThisColorExists(lineColor)) {
+            System.out.println(lineColor + " Line already exists!");
         }
-        if (isStationNameExistsAnyLine(nameStation)) {
+        if (isStationNameExistsInAnyLine(nameStation)) {
             throw new StationNameException(nameStation + " already exists!");
         }
         Line line = new Line(lineColor, this);
-        if (!line.getStations().contains(null)) {
+        if (line.getStations().isEmpty()) {
             return new Station(nameStation, line, transitStations, this);
         }
-        throw new LineNotEmptyException("Line is empty!");
+        throw new LineNotEmptyException("Line is not empty!");
     }
 
     public String getCityName() {
