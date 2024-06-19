@@ -57,6 +57,25 @@ public class Subway {
         throw new LineNotEmptyException("Line is not empty!");
     }
 
+    public Station createFirstStationInLine2(String lineColor,
+                                            String nameStation,
+                                            List<Station> transitStations) {
+        if (isLineWithThisColorExists(lineColor)) {
+            System.out.println(lineColor + " Line already exists!");
+        }
+        if (isStationNameExistsInAnyLine(nameStation)) {
+            throw new StationNameException(nameStation + " already exists!");
+        }
+        Line line = new Line(lineColor, this);
+        if (line.getStations().isEmpty()) {
+            return new Station(nameStation, line, transitStations, this);
+        }
+        throw new LineNotEmptyException("Line is not empty!");
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
     public String getCityName() {
         return cityName;
     }
