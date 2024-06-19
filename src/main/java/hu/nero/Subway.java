@@ -17,11 +17,11 @@ public class Subway {
         this.lines = new HashSet<>();
     }
 
-    public Line createNewLine(String lineColor) {
-        if (isLineWithThisColorExists(lineColor)) {
-            throw new ColorLineException(lineColor + " already exists!");
+    public Line createNewLine(String newLineColor) {
+        if (isLineWithThisColorExists(newLineColor)) {
+            throw new ColorLineException(newLineColor + " already exists!");
         }
-        Line line = new Line(lineColor, this);
+        Line line = new Line(newLineColor, this);
         lines.add(line);
         return line;
     }
@@ -44,7 +44,7 @@ public class Subway {
     public Station createFirstStationInLine(String lineColor,
                                             String nameStation,
                                             List<Station> transitStations) {
-        if (!isLineWithThisColorExists(lineColor)) {
+        if (isLineWithThisColorExists(lineColor)) {
             System.out.println(lineColor + " Line already exists!");
         }
         if (isStationNameExistsInAnyLine(nameStation)) {

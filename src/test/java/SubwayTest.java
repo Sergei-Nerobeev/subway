@@ -23,14 +23,14 @@ class SubwayTest {
     List<Station> exceptedStations = new ArrayList<>();
     List<Station> transferStations = new ArrayList<>();
     List<Station> exceptedTransferStations = new ArrayList<>();
-    Station station1 = new Station(transferStation1,line,transferStations,subway);
-    Station station2 = new Station(name, line, null,subway);
+    Station station1 = new Station(transferStation1, line, transferStations, subway);
+    Station station2 = new Station(name, line, null, subway);
 
 
     @Test
     void isNewLineCreated() {
         subway.createNewLine(colorActual);
-        subway.createNewLine("White");
+        subway.createNewLine("Blue");
         Assertions.assertEquals(colorActual, colorExpected);
     }
 
