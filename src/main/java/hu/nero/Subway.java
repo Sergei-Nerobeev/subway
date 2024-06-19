@@ -58,8 +58,8 @@ public class Subway {
     }
 
     public Station createFirstStationInLine2(String lineColor,
-                                            String nameStation,
-                                            List<Station> transitStations) {
+                                             String nameStation,
+                                             List<Station> transitStations) {
         if (isLineWithThisColorExists(lineColor)) {
             System.out.println(lineColor + " Line already exists!");
         }
@@ -73,9 +73,6 @@ public class Subway {
         throw new LineNotEmptyException("Line is not empty!");
     }
 
-    public String getCityName() {
-        return cityName;
-    }
     public String getCityName() {
         return cityName;
     }
