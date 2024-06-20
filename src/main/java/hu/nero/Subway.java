@@ -1,7 +1,6 @@
 package hu.nero;
 
 import hu.nero.exception.ColorLineException;
-import hu.nero.exception.LineNotEmptyException;
 import hu.nero.exception.StationNameException;
 
 import java.util.HashSet;
@@ -10,7 +9,7 @@ import java.util.Set;
 
 public class Subway {
     private String cityName;
-    private Set<Line> lines;
+    private final Set<Line> lines;
 
     public Subway(String cityName) {
         this.cityName = cityName;
@@ -41,10 +40,6 @@ public class Subway {
         return false;
     }
 
-    private Line getLineByColor(String lineColor){
-      return lines.stream().filter(line -> line.getColor().equals(lineColor)).findFirst().orElse(null);
-    }
-
     public Station createFirstStation(String lineColor,
                                       String stationName,
                                       List<Station> transferStations) {
@@ -54,9 +49,8 @@ public class Subway {
         if (isStationNameExistsInAnyLine(stationName)) {
             throw new StationNameException(stationName + " station already exists!");
         }
-        Line line = getLineByColor(lineColor);
-        Station station = new Station(stationName,line, transferStations, this);
-        return station;
+        Line line = new Line(lineColor, this);
+        return new Station(stationName, line, transferStations, this);
     }
 
     public String getCityName() {
@@ -71,4 +65,8 @@ public class Subway {
         return lines;
     }
 
+    @Override
+    public String toString() {
+        return cityName + " " + lines;
+    }
 }

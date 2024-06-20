@@ -84,4 +84,16 @@ public class Station {
         return subway;
     }
 
+    @Override
+    public String toString() {
+        return "Station{" +
+                "name='" + name + '\'' +
+                ", previous=" + previous +
+                ", next=" + next +
+                ", transitTimeInMinutesAndSeconds=" + transitTimeInMinutesAndSeconds +
+                ", line=" + line +
+                ", transferStations=" + transferStations +
+                ", subway=" + subway +
+                '}';
+    }
 }

@@ -3,7 +3,6 @@ import hu.nero.Station;
 import hu.nero.Subway;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -15,8 +14,8 @@ class SubwayTest {
     private Station station1;
     private Station station2;
     private List<Station> transferStations;
-    String stationName = "Медведковская";
-    String expectedNameStation = "Медведковская";
+    String actualStationName = "Медведковская";
+    String expectedStationName = "Медведковская";
     String transferStation1 = "Пермь-1";
     String transferStation2 = "Тяжмаш";
     String colorExpected = "Red";
@@ -27,22 +26,22 @@ class SubwayTest {
         subway = new Subway("Budapest");
         line = new Line(colorActual, subway);
         station1 = new Station(transferStation1, line, transferStations, subway);
-        station2 = new Station(stationName, line, null, subway);
+        station2 = new Station(actualStationName, line, null, subway);
         transferStations = new ArrayList<>();
-        List<Station> exceptedStations = new ArrayList<>();
-        List<Station> exceptedTransferStations = new ArrayList<>();
     }
 
     @Test
     void isNewLineCreated() {
         subway.createNewLine(colorActual);
         subway.createNewLine("Blue");
+        System.out.println(subway.getLines());
         Assertions.assertEquals(colorActual, colorExpected);
     }
 
     @Test
     void isLineTheSameColorAlreadyExists() {
-        subway.createFirstStation(colorActual, stationName, transferStations);
+        Station result = subway.createFirstStation(colorActual, actualStationName, transferStations);
+        System.out.println(result);
         Assertions.assertEquals(colorExpected, colorActual);
 
     }
