@@ -13,7 +13,7 @@ Q.idea/sonarlint/securityhotspotstore/f/4/f477a3c288d8324f9574454bb9c09cd41b7b96
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
 9
-	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 O
 src/main/java/hu/nero/Line.java,1\8\18deabf9cb02e4f9c1a1eb69f9ac259b5c5a3222
 R

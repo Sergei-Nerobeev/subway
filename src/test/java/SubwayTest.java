@@ -3,11 +3,13 @@ import hu.nero.Station;
 import hu.nero.Subway;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DisplayName("Тестирование методов класса Subway")
 class SubwayTest {
     private Subway subway;
     private Line line;
@@ -30,16 +32,17 @@ class SubwayTest {
         transferStations = new ArrayList<>();
     }
 
+    @DisplayName("Создана ли новая линия?")
     @Test
     void isNewLineCreated() {
         subway.createNewLine(colorActual);
         subway.createNewLine("Blue");
-        System.out.println(subway.getLines());
         Assertions.assertEquals(colorActual, colorExpected);
     }
 
+    @DisplayName("Создана ли первая станция в линии?")
     @Test
-    void isLineTheSameColorAlreadyExists() {
+    void firstStationInLineCreated() {
         Station result = subway.createFirstStation(colorActual, actualStationName, transferStations);
         System.out.println(result);
         Assertions.assertEquals(colorExpected, colorActual);
