@@ -2,30 +2,36 @@ import hu.nero.Line;
 import hu.nero.Station;
 import hu.nero.Subway;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class SubwayTest {
-
-    String name = "Медведковская";
+    private Subway subway;
+    private Line line;
+    private Station station1;
+    private Station station2;
+    private List<Station> transferStations;
+    String stationName = "Медведковская";
     String expectedNameStation = "Медведковская";
-    Station previous;
-    Station next;
     String transferStation1 = "Пермь-1";
     String transferStation2 = "Тяжмаш";
-    String colorActual = "Red";
     String colorExpected = "Red";
-    Subway subway = new Subway("Budapest");
-    Line line = new Line(colorActual, subway);
-    List<Station> stations = new ArrayList<>(); //спросить
-    List<Station> exceptedStations = new ArrayList<>();
-    List<Station> transferStations = new ArrayList<>();
-    List<Station> exceptedTransferStations = new ArrayList<>();
-    Station station1 = new Station(transferStation1, line, transferStations, subway);
-    Station station2 = new Station(name, line, null, subway);
+    String colorActual = "Red";
 
+    @BeforeEach
+    void setUp() {
+        subway = new Subway("Budapest");
+        line = new Line(colorActual, subway);
+        station1 = new Station(transferStation1, line, transferStations, subway);
+        station2 = new Station(stationName, line, null, subway);
+        transferStations = new ArrayList<>();
+        List<Station> exceptedStations = new ArrayList<>();
+        List<Station> exceptedTransferStations = new ArrayList<>();
+    }
 
     @Test
     void isNewLineCreated() {
@@ -35,13 +41,10 @@ class SubwayTest {
     }
 
     @Test
-    void createFirstStationLineTest() {
-        transferStations.add(station1);
-        exceptedTransferStations.add(station1);
-        subway.createFirstStationInLine(colorActual, name, transferStations);
-        Assertions.assertEquals(colorActual, colorExpected);
-        Assertions.assertEquals(name, expectedNameStation);
-        Assertions.assertEquals(transferStations, exceptedTransferStations);
+    void isLineTheSameColorAlreadyExists() {
+        subway.createFirstStation(colorActual, stationName, transferStations);
+        Assertions.assertEquals(colorExpected, colorActual);
+
     }
 
 

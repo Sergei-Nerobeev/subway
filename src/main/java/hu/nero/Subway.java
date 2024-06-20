@@ -41,36 +41,22 @@ public class Subway {
         return false;
     }
 
-    public Station createFirstStationInLine(String lineColor,
-                                            String nameStation,
-                                            List<Station> transitStations) {
-        if (isLineWithThisColorExists(lineColor)) {
-            System.out.println(lineColor + " Line already exists!");
-        }
-        if (isStationNameExistsInAnyLine(nameStation)) {
-            throw new StationNameException(nameStation + " already exists!");
-        }
-        Line line = new Line(lineColor, this);
-        if (line.getStations().isEmpty()) {
-            return new Station(nameStation, line, transitStations, this);
-        }
-        throw new LineNotEmptyException("Line is not empty!");
+    private Line getLineByColor(String lineColor){
+      return lines.stream().filter(line -> line.getColor().equals(lineColor)).findFirst().orElse(null);
     }
 
-    public Station createFirstStationInLine2(String lineColor,
-                                             String nameStation,
-                                             List<Station> transitStations) {
+    public Station createFirstStation(String lineColor,
+                                      String stationName,
+                                      List<Station> transferStations) {
         if (isLineWithThisColorExists(lineColor)) {
-            System.out.println(lineColor + " Line already exists!");
+            throw new ColorLineException(lineColor + " color Line already exists!");
         }
-        if (isStationNameExistsInAnyLine(nameStation)) {
-            throw new StationNameException(nameStation + " already exists!");
+        if (isStationNameExistsInAnyLine(stationName)) {
+            throw new StationNameException(stationName + " station already exists!");
         }
-        Line line = new Line(lineColor, this);
-        if (line.getStations().isEmpty()) {
-            return new Station(nameStation, line, transitStations, this);
-        }
-        throw new LineNotEmptyException("Line is not empty!");
+        Line line = getLineByColor(lineColor);
+        Station station = new Station(stationName,line, transferStations, this);
+        return station;
     }
 
     public String getCityName() {
