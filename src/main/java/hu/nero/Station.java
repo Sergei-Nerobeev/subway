@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Station {
-    private static final Logger log = LogManager.getLogger(Station.class);
     private final String name;
     private Station previous;
     private Station next;

@@ -1,6 +1,7 @@
 package hu.nero;
 
 import hu.nero.exception.ColorLineException;
+import hu.nero.exception.LineNotEmptyException;
 import hu.nero.exception.StationNameException;
 
 import java.util.HashSet;
@@ -43,14 +44,44 @@ public class Subway {
     public Station createFirstStation(String lineColor,
                                       String stationName,
                                       List<Station> transferStations) {
-        if (isLineWithThisColorExists(lineColor)) {
-            throw new ColorLineException(lineColor + " color Line already exists!");
+        checkLineExists(lineColor);
+        checkStationNameNotExists(stationName);
+        Line line = getLine(lineColor);
+        checkLineIsEmpty(line);
+
+        Station station = new Station(stationName, line, transferStations, this);
+        line.addStation(station);
+
+        return station;
+    }
+
+    private static void checkLineIsEmpty(Line line) {
+        if (line.getStations() != null && !line.getStations().isEmpty()) {
+            throw new LineNotEmptyException(line + " is not empty");
         }
+    }
+
+    private void checkStationNameNotExists(String stationName) {
         if (isStationNameExistsInAnyLine(stationName)) {
             throw new StationNameException(stationName + " station already exists!");
         }
-        Line line = new Line(lineColor, this);
-        return new Station(stationName, line, transferStations, this);
+    }
+
+    private void checkLineExists(String lineColor) {
+        if (!isLineWithThisColorExists(lineColor)) {
+            throw new ColorLineException(lineColor + " color Line doesn't exist!");
+        }
+    }
+
+    private Line getLine(String lineColor) {
+        Line line = null;
+        for (Line l : lines) {
+            if (l.getColor().equals(lineColor)) {
+                line = l;
+                break;
+            }
+        }
+        return line;
     }
 
     public String getCityName() {

@@ -16,8 +16,8 @@ class SubwayTest {
     private Station station1;
     private Station station2;
     private List<Station> transferStations;
-    String actualStationName = "Медведковская";
-    String expectedStationName = "Медведковская";
+    String actualStationName = "Mexico";
+    String expectedStationName = "Mexico";
     String transferStation1 = "Пермь-1";
     String transferStation2 = "Тяжмаш";
     String colorExpected = "Red";

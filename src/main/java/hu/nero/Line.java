@@ -5,13 +5,16 @@ import java.util.List;
 
 public class Line {
     private String color;
-    private List<Station> stations;
+    private final List<Station> stations;
     private Subway subway;
 
     public Line(String color, Subway subway) {
         this.color = color;
         this.subway = subway;
         this.stations = new ArrayList<>();
+    }
+    public void addStation(Station station) {
+        stations.add(station);
     }
 
     public String getColor() {
