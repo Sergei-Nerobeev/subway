@@ -26,11 +26,11 @@ public class Subway {
         return line;
     }
 
-    private boolean isLineWithThisColorExists(String newLineColor) {
+    public boolean isLineWithThisColorExists(String newLineColor) {
         return lines.stream().anyMatch(line -> line.getColor().equals(newLineColor));
     }
 
-    private boolean isStationNameExistsInAnyLine(String nameStation) {
+    public boolean isStationNameExistsInAnyLine(String nameStation) {
         for (Line line : lines) {
             for (Station station : line.getStations()) {
                 if (station.getName().equals(nameStation)) {
@@ -55,13 +55,13 @@ public class Subway {
         return station;
     }
 
-    private static void checkLineIsEmpty(Line line) {
+    static void checkLineIsEmpty(Line line) {
         if (line.getStations() != null && !line.getStations().isEmpty()) {
             throw new LineNotEmptyException(line + " is not empty");
         }
     }
 
-    private void checkStationNameNotExists(String stationName) {
+    void checkStationNameNotExists(String stationName) {
         if (isStationNameExistsInAnyLine(stationName)) {
             throw new StationNameException(stationName + " station already exists!");
         }
@@ -73,7 +73,7 @@ public class Subway {
         }
     }
 
-    private Line getLine(String lineColor) {
+     Line getLine(String lineColor) {
         Line line = null;
         for (Line l : lines) {
             if (l.getColor().equals(lineColor)) {
