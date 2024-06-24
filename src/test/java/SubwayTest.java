@@ -1,6 +1,7 @@
 import hu.nero.Line;
 import hu.nero.Station;
 import hu.nero.Subway;
+import hu.nero.exception.ColorLineException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -43,17 +44,24 @@ class SubwayTest {
     @Test
     void isLineEmpty() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         String cityName = "Budapest";
-        String colorLine = "Red";
+        String colorLine = "Blue";
         Subway subway = new Subway(cityName);
         var line = new Line(colorLine,subway);
 
-        Method method = Subway.class.getDeclaredMethod("checkLineIsEmpty", Line.class);
+        Method method = Subway.class.getDeclaredMethod("checkLineExists", String.class);
         method.setAccessible(true);
         boolean expected = false;
 
-        boolean actual = (boolean) method.invoke(subway,line);
+        method.invoke(subway,colorLine);
 
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertThrows(ColorLineException.class, () -> {
+            try {
+                method.invoke(subway, colorLine);
+            } catch (InvocationTargetException | IllegalAccessException exception) {
+                throw new RuntimeException("Help!");
+            }
+        });
+
     }
 
     @DisplayName("Создание новой линии - введены корректные правильные параметры - линия создана")
