@@ -11,7 +11,9 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @DisplayName("Тестирование методов класса Subway")
 class SubwayTest {
@@ -56,10 +58,13 @@ class SubwayTest {
         String colorLine = "Red";
         var cityName = "Budapest";
         Subway subway = new Subway(cityName);
-        subway.createNewLine(colorLine);
+        Line exptLine = new Line(colorLine, subway);
+        Line actLine = subway.createNewLine(colorLine);
 
+        Assertions.assertEquals(exptLine,actLine);
 
     }
+
     @DisplayName("createFirstStation - correct data - first station created")
     @Test
     void createFirstStationTest() {
@@ -69,14 +74,12 @@ class SubwayTest {
         Subway subway = new Subway(cityName);
         Line line = new Line(lineColor, subway);
         List<Station> transferStations = List.of();
-        Station actlStation = new Station(nameStation, line,transferStations,subway);
+        Station actlStation = new Station(nameStation, line, transferStations, subway);
+        Station exptStation = subway.createFirstStation(lineColor, nameStation, transferStations);
 
-        Station exptStation = subway.createFirstStation(lineColor,nameStation,transferStations);
-
-        Assertions.assertEquals(exptStation,actlStation);
+        Assertions.assertEquals(exptStation, actlStation);
 
     }
-
 
 
 }
