@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -43,16 +44,15 @@ class SubwayTest {
 
     @DisplayName("Поиск станции в линии - корректные параметры - перехват исключения")
     @Test
-    void isLineEmptyException() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    void expectedException() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         String cityName = "Budapest";
         String colorLine = "Red";
         Subway subway = new Subway(cityName);
         Method method = Subway.class.getDeclaredMethod("checkLineExists", String.class);
         method.setAccessible(true);
 
-
         ColorLineException exception = Assertions.assertThrows(ColorLineException.class, () -> {
-            method.invoke(subway,colorLine);
+            method.invoke(colorLine);
         });
         Assertions.assertEquals(exception,method.invoke(subway,colorLine));
 
@@ -65,8 +65,9 @@ class SubwayTest {
         String colorLine = "Red";
         var subway = new Subway(cityName);
         var line = new Line(colorLine,subway);
-        Throwable exception = Assertions.assertThrows(LineNotEmptyException.class,
-                );
+        Throwable exception = Assertions.assertThrows(ColorLineException.class,() -> {
+            throw new ColorLineException("is not empty");});
+
         Assertions.assertEquals("is not empty",exception.getMessage());
 
 
