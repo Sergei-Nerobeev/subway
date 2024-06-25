@@ -21,7 +21,7 @@ R
 Q
 !src/main/java/hu/nero/Subway.java,e\7\e7904297c5d4d2a9429c4b51721e19578aa3ca2e
 M
-src/test/java/SubwayTest.java,2\8\28eb549a0a2c49dd0dba4f0b84d9733c663cdb61
+src/test/java/SubwayTest.java,2/8/28eb549a0a2c49dd0dba4f0b84d9733c663cdb61
 w
 G.idea/sonarlint/issuestore/b/6/b6a05ded736153e050d4d00a704a79bcd7ddda66,9/d/9d4301d0b31f13e104895e8cd624b9ec00ed1144
 w

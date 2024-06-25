@@ -2,6 +2,7 @@ import hu.nero.Line;
 import hu.nero.Station;
 import hu.nero.Subway;
 import hu.nero.exception.ColorLineException;
+import hu.nero.exception.LineNotEmptyException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -40,25 +41,34 @@ class SubwayTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @DisplayName("Поиск станций в линии - корректные параметры - перехват исключения")
+    @DisplayName("Поиск станции в линии - корректные параметры - перехват исключения")
     @Test
-    void isLineEmptyException() throws NoSuchMethodException {
+    void isLineEmptyException() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         String cityName = "Budapest";
-        String nonExistingColorLine = "Green";
+        String colorLine = "Red";
         Subway subway = new Subway(cityName);
         Method method = Subway.class.getDeclaredMethod("checkLineExists", String.class);
         method.setAccessible(true);
 
 
-        Assertions.assertThrows(ColorLineException.class, () -> {
-            throw new ColorLineException("");
+        ColorLineException exception = Assertions.assertThrows(ColorLineException.class, () -> {
+            method.invoke(subway,colorLine);
         });
+        Assertions.assertEquals(exception,method.invoke(subway,colorLine));
 
     }
 
-    @DisplayName("Проверка линии на содержание обьектов станций - корректные параметры - линия пустая")
+    @DisplayName("Проверка линии на содержание станций - корректные параметры - линия пустая")
     @Test
     void isCheckLineEmpty(){
+        String cityName = "Budapest";
+        String colorLine = "Red";
+        var subway = new Subway(cityName);
+        var line = new Line(colorLine,subway);
+        Throwable exception = Assertions.assertThrows(LineNotEmptyException.class,
+                );
+        Assertions.assertEquals("is not empty",exception.getMessage());
+
 
     }
 
@@ -69,7 +79,7 @@ class SubwayTest {
 
     }
 
-    @DisplayName("Создана ли первая станция в линии?")
+    @DisplayName(" ")
     @Test
     void firstStationInLineCreated() {
 
