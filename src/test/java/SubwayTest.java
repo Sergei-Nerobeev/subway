@@ -2,6 +2,7 @@ import hu.nero.Line;
 import hu.nero.Station;
 import hu.nero.Subway;
 import hu.nero.exception.ColorLineException;
+import hu.nero.exception.LineNotEmptyException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,66 +16,67 @@ import java.util.List;
 @DisplayName("Тестирование методов класса Subway")
 class SubwayTest {
 
-    @DisplayName("Поиск цвета в списке линий - корректные параметры - такого цвета в списке нет")
+    @DisplayName("isLineWithThisColorExists - корректные параметры - такого цвета в списке нет")
     @Test
     void isColorExistsInlines() {
         String cityName = "Budapest";
         String colorLine = "Red";
         Subway subway = new Subway(cityName);
-        boolean expected = false;
 
         boolean actual = subway.isLineWithThisColorExists(colorLine);
 
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertFalse(actual);
     }
 
-    @DisplayName("Поиск названия станции в списке линий - корректные параметры - такой станции в списке нет")
+    @DisplayName("isStationNameExistsInAnyLine - корректные параметры - такой станции в списке нет")
     @Test
     void isStationNameInlines() {
         String cityName = "Budapest";
         Subway subway = new Subway(cityName);
-        boolean expected = false;
 
         boolean actual = subway.isStationNameExistsInAnyLine(cityName);
 
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertFalse(actual);
     }
 
-    @DisplayName("Поиск станций в линии - корректные параметры - перехват исключения")
+    @DisplayName("checkLineIsEmpty - корректные параметры - выброс исключения")
     @Test
-    void isLineEmptyException() throws NoSuchMethodException {
-        String cityName = "Budapest";
-        String nonExistingColorLine = "Green";
-        Subway subway = new Subway(cityName);
-        Method method = Subway.class.getDeclaredMethod("checkLineExists", String.class);
-        method.setAccessible(true);
+    void checkLineIsEmptyTest() throws NoSuchMethodException {
 
-
-        Assertions.assertThrows(ColorLineException.class, () -> {
-            throw new ColorLineException("");
+        Method checkLineIsEmptyMethod = Subway.class.getDeclaredMethod("checkLineIsEmpty", Line.class);
+        checkLineIsEmptyMethod.setAccessible(true);
+        Assertions.assertThrows(LineNotEmptyException.class, () -> {
+            throw new LineNotEmptyException(" is not empty!");
         });
-
     }
 
-    @DisplayName("Проверка линии на содержание обьектов станций - корректные параметры - линия пустая")
+    @DisplayName("createNewLine - correct data - new line created")
     @Test
-    void isCheckLineEmpty(){
-
-    }
-
-    @DisplayName("Создание новой линии - корректные параметры - линия создана")
-    @Test
-    void isNewLineCreated() {
+    void createNewLineTest() {
         String colorLine = "Red";
+        var cityName = "Budapest";
+        Subway subway = new Subway(cityName);
+        subway.createNewLine(colorLine);
+
 
     }
-
-    @DisplayName("Создана ли первая станция в линии?")
+    @DisplayName("createFirstStation - correct data - first station created")
     @Test
-    void firstStationInLineCreated() {
+    void createFirstStationTest() {
+        var lineColor = "White";
+        var nameStation = "Октогон";
+        var cityName = "Budapest";
+        Subway subway = new Subway(cityName);
+        Line line = new Line(lineColor, subway);
+        List<Station> transferStations = List.of();
+        Station actlStation = new Station(nameStation, line,transferStations,subway);
 
+        Station exptStation = subway.createFirstStation(lineColor,nameStation,transferStations);
+
+        Assertions.assertEquals(exptStation,actlStation);
 
     }
+
 
 
 }
