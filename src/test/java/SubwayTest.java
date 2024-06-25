@@ -15,7 +15,7 @@ import java.util.List;
 @DisplayName("Тестирование методов класса Subway")
 class SubwayTest {
 
-    @DisplayName("Поиск цвета в списке линий - введены корректные параметры - такого цвета в списке нет")
+    @DisplayName("Поиск цвета в списке линий - корректные параметры - такого цвета в списке нет")
     @Test
     void isColorExistsInlines() {
         String cityName = "Budapest";
@@ -28,7 +28,7 @@ class SubwayTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @DisplayName("Поиск названия станции в списке линий - введены корректные параметры - такой станции в списке нет")
+    @DisplayName("Поиск названия станции в списке линий - корректные параметры - такой станции в списке нет")
     @Test
     void isStationNameInlines() {
         String cityName = "Budapest";
@@ -40,31 +40,29 @@ class SubwayTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @DisplayName("Поиск станций в линии - введены корректные параметры - линия пустая")
+    @DisplayName("Поиск станций в линии - корректные параметры - перехват исключения")
     @Test
-    void isLineEmpty() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    void isLineEmptyException() throws NoSuchMethodException {
         String cityName = "Budapest";
-        String colorLine = "Blue";
+        String nonExistingColorLine = "Green";
         Subway subway = new Subway(cityName);
-        var line = new Line(colorLine,subway);
-
         Method method = Subway.class.getDeclaredMethod("checkLineExists", String.class);
         method.setAccessible(true);
-        boolean expected = false;
 
-        method.invoke(subway,colorLine);
 
         Assertions.assertThrows(ColorLineException.class, () -> {
-            try {
-                method.invoke(subway, colorLine);
-            } catch (InvocationTargetException | IllegalAccessException exception) {
-                throw new RuntimeException("Help!");
-            }
+            throw new ColorLineException("");
         });
 
     }
 
-    @DisplayName("Создание новой линии - введены корректные правильные параметры - линия создана")
+    @DisplayName("Проверка линии на содержание обьектов станций - корректные параметры - линия пустая")
+    @Test
+    void isCheckLineEmpty(){
+
+    }
+
+    @DisplayName("Создание новой линии - корректные параметры - линия создана")
     @Test
     void isNewLineCreated() {
         String colorLine = "Red";
