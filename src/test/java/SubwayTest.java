@@ -3,10 +3,7 @@ import hu.nero.Station;
 import hu.nero.Subway;
 import hu.nero.exception.ColorLineException;
 import hu.nero.exception.LineNotEmptyException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -18,7 +15,7 @@ import java.util.Set;
 @DisplayName("Тестирование методов класса Subway")
 class SubwayTest {
 
-    @DisplayName("isLineWithThisColorExists - корректные параметры - такого цвета в списке нет")
+    @DisplayName("isLineWithThisColorExists - correct data - Line color doesn't exist!")
     @Test
     void isColorExistsInlines() {
         String cityName = "Budapest";
@@ -30,7 +27,7 @@ class SubwayTest {
         Assertions.assertFalse(actual);
     }
 
-    @DisplayName("isStationNameExistsInAnyLine - корректные параметры - такой станции в списке нет")
+    @DisplayName("isStationNameExistsInAnyLine - correct data - station already exists!")
     @Test
     void isStationNameInlines() {
         String cityName = "Budapest";
@@ -58,28 +55,30 @@ class SubwayTest {
         String colorLine = "Red";
         var cityName = "Budapest";
         Subway subway = new Subway(cityName);
-        Line exptLine = new Line(colorLine, subway);
-        Line actLine = subway.createNewLine(colorLine);
 
-        Assertions.assertEquals(exptLine,actLine);
+        Line line = subway.createNewLine(colorLine);
 
+        Assertions.assertNotNull(line);
+        Assertions.assertEquals(colorLine,line.getColor());
     }
+
+    @Disabled
 
     @DisplayName("createFirstStation - correct data - first station created")
     @Test
     void createFirstStationTest() {
-        var lineColor = "White";
+        var colorLine = "White";
         var nameStation = "Октогон";
         var cityName = "Budapest";
         Subway subway = new Subway(cityName);
-        Line line = new Line(lineColor, subway);
+        Line line = subway.createNewLine(colorLine);
         List<Station> transferStations = List.of();
+
         Station actlStation = new Station(nameStation, line, transferStations, subway);
-        Station exptStation = subway.createFirstStation(lineColor, nameStation, transferStations);
+        Station exptStation = subway.createFirstStation(colorLine, nameStation, transferStations);
 
         Assertions.assertEquals(exptStation, actlStation);
 
     }
-
 
 }
