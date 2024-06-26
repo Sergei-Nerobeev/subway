@@ -6,6 +6,7 @@ import hu.nero.exception.StationNameException;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class Subway {
@@ -69,7 +70,7 @@ public class Subway {
 
     private void checkLineExists(String lineColor) {
         if (!isLineWithThisColorExists(lineColor)) {
-            throw new ColorLineException(lineColor + " color Line doesn't exist!");
+            throw new ColorLineException(lineColor + " Line color doesn't exist!");
         }
     }
 
@@ -99,5 +100,18 @@ public class Subway {
     @Override
     public String toString() {
         return cityName + " " + lines;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Subway subway = (Subway) o;
+        return Objects.equals(cityName, subway.cityName) && Objects.equals(lines, subway.lines);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cityName, lines);
     }
 }
