@@ -84,7 +84,6 @@ public class Station {
         return subway;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
