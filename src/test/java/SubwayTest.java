@@ -59,10 +59,8 @@ class SubwayTest {
         Line line = subway.createNewLine(colorLine);
 
         Assertions.assertNotNull(line);
-        Assertions.assertEquals(colorLine,line.getColor());
+        Assertions.assertEquals(colorLine, line.getColor());
     }
-
-    @Disabled
 
     @DisplayName("createFirstStation - correct data - first station created")
     @Test
