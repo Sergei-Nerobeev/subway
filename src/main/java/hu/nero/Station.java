@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Station {
     private final String name;
@@ -35,7 +36,7 @@ public class Station {
                    Line line,
                    List<Station> transferStations,
                    Subway subway) {
-            this(name,
+        this(name,
                 null,
                 null,
                 null,
@@ -81,6 +82,25 @@ public class Station {
 
     public Subway getSubway() {
         return subway;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Station station = (Station) o;
+        return Objects.equals(name, station.name)
+                && Objects.equals(previous, station.previous)
+                && Objects.equals(next, station.next)
+                && Objects.equals(transitTimeInMinutesAndSeconds, station.transitTimeInMinutesAndSeconds)
+                && Objects.equals(line, station.line)
+                && Objects.equals(transferStations, station.transferStations);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, previous, next, transitTimeInMinutesAndSeconds, line, transferStations);
     }
 
     @Override

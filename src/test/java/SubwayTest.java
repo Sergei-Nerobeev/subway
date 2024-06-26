@@ -41,7 +41,7 @@ class SubwayTest {
         Assertions.assertFalse(actual);
     }
 
-    @DisplayName("checkLineIsEmpty - корректные параметры - выброс исключения")
+    @DisplayName("checkLineIsEmpty - correct data - LineNotEmptyException")
     @Test
     void checkLineIsEmptyTest() throws NoSuchMethodException {
 
